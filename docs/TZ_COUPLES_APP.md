@@ -1,28 +1,55 @@
-# ТЗ: Couples App (рабочее название — **AURORA PAIR**)
+# ТЗ: **LovePDuo** (LPD — Love Play Duo)
 
-> Версия документа: **1.0.0-draft**  
+> Версия документа: **1.1.0**  
 > Статус: живой документ — можно дополнять секциями без ломки структуры  
 > Платформа: **Android (Google Play)** в первую очередь; iOS — фаза 2  
 > Исполнитель реализации: **Cursor Agent** (автономная разработка, самопроверка, git push)  
-> Язык продукта: RU (основной), EN (заготовка строк)
+> Язык продукта: RU (основной), EN (заготовка строк)  
+> Локальный путь проекта владельца: **`C:\prodject\LovePDio`**  
+> Репозиторий/рабочая копия агента: этот git-проект; зеркалировать структуру и смысл ТЗ под LovePDuo
 
 ---
 
 ## 0. Как пользоваться этим ТЗ
 
 1. Это **источник правды** для продукта. Любое изменение фичи = правка версии и changelog в конце.
-2. Cursor читает ТЗ целиком перед стартом спринта и работает **без ожидания уточнений**, если решение можно принять из секций 3–12.
-3. Если конфликт: **приоритет** = Acceptance Criteria (секция 14) > UX-правила (секция 5) > backlog (секция 16).
+2. Cursor читает ТЗ целиком перед стартом спринта и работает **без ожидания уточнений**, если решение можно принять из секций 3–12 и 24.
+3. Если конфликт: **приоритет** = Acceptance Criteria (секция 14) + Ideal Bar / авто-доводка (секция 24) > UX-правила (секция 5) > backlog (секция 16).
 4. Документ специально **большой и избыточный**, чтобы агент мог сам дизайнить, рисовать ассеты и доводить до идеала по чеклистам.
 
 ### 0.1. Правила для Cursor Agent
 
-- Работай итерациями: **спроектировать → реализовать → запустить → руками/скриптом проверить → починить → commit → push**.
+- Работай итерациями: **спроектировать → реализовать → запустить → проверить → починить → улучшить до Ideal Bar → commit → push**.
 - Не спрашивай человека про цвета, отступы, названия экранов, если они уже заданы ниже.
 - Если ассет нужен — **создай сам** (SVG/Canvas/Blender/процедурка) по списку секции 9. Не ставь заглушки “TODO art” надолго.
 - UI не должен выглядеть как шаблон Material “из коробки”. Кастомные компоненты обязательны.
+- **Стек — средство, не цель.** Flutter / RN / другое — выбирай то, на чём быстрее получится **вау-визуал + стабильный realtime на 2 телефона**. Зафиксируй выбор в README и не прыгай без причины.
 - Каждые заметные изменения: commit с понятным сообщением + push в feature-ветку.
-- Definition of Done для любой фичи: работает на эмуляторе/устройстве, нет крашей, соответствует dark-romantic визуалу, есть базовые empty/error/loading состояния.
+- Definition of Done для любой фичи: работает на 2 устройствах/эмуляторах, нет крашей, соответствует dark-romantic инновационному визуалу, есть empty/error/loading, и агент **не видит очевидных улучшений**, которые ещё не сделал (см. §24).
+
+### 0.2. Режим работы до упора (критично)
+
+Агент **не останавливается “потому что вроде работает”**.
+
+Работать пока не случится одно из:
+1. человека/оператора явно остановили;
+2. внешний фактор оборвал сессию (лимит среды, сеть, инфраструктура);
+3. агент на **~100% уверен**, что выжал свой максимум по текущему скоупу: Ideal Bar (§14.2), чеклист “не дефолт” (§23), нет известных крашей на main flows, ассеты не-placeholder, игры проработаны и играют с 2 телефонов.
+
+Если агент видит, что экран/игра/анимация/копирайт **не идеальны или их можно улучшить** — он **обязан улучшить** до Ideal Bar, а не оставлять “на потом”, пока есть возможность продолжать.
+
+Перед паузой сессии всегда оставлять:
+- собираемый проект;
+- `docs/PROGRESS.md` с честным статусом;
+- push в git.
+
+### 0.3. Путь проекта
+
+- У владельца локально: **`C:\prodject\LovePDio`**
+- Имя продукта: **LovePDuo** (бренд)
+- Короткий бренд/аббревиатура: **LPD** = Love Play Duo
+- В коде/пакетах ориентиры: `lovepduo`, `love_p_duo`, applicationId вроде `app.lovepduo`
+- Документы ТЗ/прогресса: `docs/` внутри проекта
 
 ---
 
@@ -30,30 +57,30 @@
 
 ### 1.1. One-liner
 
-**AURORA PAIR** — тёмное романтичное приложение для пар: совместные миниигры в реальном времени, общие ритуалы, музыка и лёгкие развлечения “на двоих”, без ощущения дефолтного “relationship tracker”.
+**LovePDuo (LPD)** — тёмное, дерзко-красивое приложение для влюблённых: проработанные миниигры на **двух телефонах**, общая музыка, которая остаётся в приложении, и ритуалы “вместе”, без ватной пастельной эстетики.
 
 ### 1.2. Зачем это существует
 
-Большинство couple-приложений — пастельные дневники, вопросы “насколько вы совместимы” и скучные чеклисты.  
-Мы делаем другое: **игровой продукт отношений** — красивый, атмосферный, с совместным действием здесь-и-сейчас.
+Обычные couple-приложения — светлые, милые, одинаковые.  
+LovePDuo должен выглядеть так, будто **зашёл в другой мир**: глубокий dark romantic, янтарь и пыльная роза, свет как у ночи и свечи, инновационный UI, от которого “ноги судорогой”.
 
 ### 1.3. Ценность
 
 Для пары:
-- играть вместе, даже если не рядом физически;
-- слушать “наши треки”;
-- получать вайб свидания в телефоне;
-- копить общие моменты (не как скучный журнал, а как лор пары).
+- играть вместе с двух телефонов (рядом или на расстоянии);
+- соревноваться/кооперировать и получать живые, дерзко-милые реакции после раунда;
+- держать **свою** музыку внутри приложения;
+- ловить вайб свидания, а не “учёт отношений”.
 
 Для продукта:
-- удержание через ежедневные короткие сессии + совместные сессии по вечерам;
-- виральность через invite-code / QR / deep link.
+- удержание через вечерние сессии вдвоём;
+- виральность через invite-code / QR / deep link / “докажи что любишь сильнее”.
 
 ### 1.4. Позиционирование
 
-- Не “календарь месячных и ссор”.
-- Не “типовой чат с сердечками”.
-- Ближе к: **cozy multiplayer toy + romantic social space**.
+- Не светлая ванильная love-app.
+- Не “чуть тёмненький” шаблон с сердечками.
+- **Инновационный dark romantic playground для двоих.**
 
 ---
 
@@ -61,56 +88,58 @@
 
 ### 2.1. ЦА
 
-- Пары 16–35 (основной фокус 18–28).
-- LDR (long-distance) и пары в одном городе.
-- Любят милые/эстетичные приложения, TikTok/Instagram визуал, совместные игры.
+- Пары 16–35 (фокус 18–28).
+- LDR и пары в одном городе.
+- Хотят эстетику уровня Reels/TikTok, а не “приложение из 2016”.
 
 ### 2.2. Anti-persona
 
-- Люди, которым нужен только серьёзный relationship-therapy продукт.
-- Пользователи, ожидающие полноценный MMORPG/Steam-AAA.
+- Кому нужен только therapy-дневник.
+- Кто ждёт AAA-MMORPG.
 
-### 2.3. Ключевые сценарии (Jobs To Be Done)
+### 2.3. Jobs To Be Done
 
-1. «Мы скучаем / далеко — хотим быстро поиграть вместе 10 минут».
-2. «Хотим вечером атмосферу свидания в телефоне».
-3. «Хотим общую музыку и плейлист “наших” треков».
-4. «Хотим милую активность, а не переписку в мессенджере».
-5. «Хотим подарить партнёру красивый digital-опыт».
+1. «Хотим быстро поиграть с двух телефонов 10–15 минут».
+2. «Хотим атмосферу ночи/свидания, а не детский UI».
+3. «Хотим нашу музыку внутри приложения».
+4. «Хотим азарт + флирт после счёта, без ваты».
+5. «Хотим продукт, который стыдно не показать друзьям — потому что красиво».
 
 ---
 
 ## 3. Бренд и нейминг
 
-### 3.1. Рабочее название
+### 3.1. Название — зафиксировано
 
-**AURORA PAIR** (можно сменить позже без смены архитектуры — всё через brand tokens).
+- **LovePDuo**
+- Произношение/маркетинг: легко читается, запоминается.
+- Коротко в речи: **LPD** / расшифровка **Love Play Duo**.
+- Store title (черновик): `LovePDuo: игры для двоих`
+- Подзаголовок: `Love Play Duo — тёмная игровая зона для пары`
 
-Альтернативы (оставить в backlog бренда):
-- NOCTURNE TWO
-- VELVET LINK
-- AFTERGLOW
-- PAIRLIGHT
-- DUSK & US
+Старые имена (Aurora Pair и т.п.) **не использовать** в UI.
 
 ### 3.2. Tone of voice
 
-- Тёплый, чуть поэтичный, без детского сюсюканья.
-- Короткие фразы. Без корпоративного “оптимизируйте ваши отношения”.
-- Примеры микрокопирайта:
-  - «Пара связана. Можно начинать.»
-  - «Один жест — и вы в одной комнате.»
-  - «Сегодня вечером — только вы двое.»
+- Тёплый, чуть дерзкий, живой.
+- Можно лёгкий подкол после игр (флирт/азарт), но без токсичности и без стыда.
+- Не корпоративно. Не сюсюкающе-ватно.
 
-### 3.3. Бренд-сигнал на первом экране
+Примеры:
+- «Пара в сборе. Можно жечь.»
+- «LPD online. Ваш ход.»
+- «Она вырвалась вперёд. Уговори реванш — и докажи обратное.»
+- «Музыка пары сохранена. Никуда не денется.»
 
-Первый viewport onboarding/home должен читаться как бренд:
-- крупный логотип/wordmark **AURORA**;
+### 3.3. Бренд на первом экране
+
+Hero первого viewport:
+- крупный wordmark **LovePDuo** (или **LPD** + полная расшифровка мельче);
 - один короткий подзаголовок;
 - один CTA;
-- доминантный визуальный фон (не плоский цвет).
+- доминантный full-bleed визуальный фон.
 
-Если убрать навбар — должно быть ясно, что это Aurora, а не “ещё одно couple app”.
+Brand test: без навбара всё равно понятно, что это LovePDuo.
 
 ---
 
@@ -121,46 +150,45 @@
 | Фаза | Платформа | Статус |
 |------|-----------|--------|
 | MVP | Android (Play Market) | обязательно |
-| 1.5 | Progressive Web / preview web build для демо | желательно |
+| 1.5 | Preview web / internal demo | желательно |
 | 2 | iOS | после стабилизации Android |
-| Later | Desktop companion (не Steam в MVP) | опционально |
 
-### 4.2. Рекомендуемый стек (Cursor выбирает и фиксирует в README)
+### 4.2. Стек
 
-Предпочтительный путь для скорости + красоты UI:
+Владельцу стек **не важен**. Важны:
+1. визуальный вау-эффект;
+2. стабильная игра с **2 телефонов**;
+3. возможность доводить UI до идеала.
 
-- **Flutter** (Dart) — один код, сильная кастомная отрисовка, анимации.
-  - или **React Native + Expo** — если агент сильнее в RN/TS.
+Рекомендация по умолчанию: **Flutter** (быстрые кастомные анимации + один код).  
+Допустимо React Native / другое, если агент уверен, что так красивее/быстрее выйдет тот же Ideal Bar.
 
-Сервер/синхрон:
-- Backend: **Firebase** (Auth + Firestore + Realtime Database/Presence) **или** Supabase + Realtime.
-- Для игр с низкой латентностью: WebSocket-комната (можно Firebase Realtime / Supabase channel / собственный Node socket как upgrade).
+Backend / realtime:
+- Firebase или Supabase + realtime channels / presence;
+- для игр — комната с синхронизацией состояния (WebSocket/Realtime DB).
 
-Локально:
-- кэш профиля/пары;
-- оффлайн-просмотр части контента (музыка метаданные, история).
+### 4.3. Структура репозитория (создать при старте реализации)
 
-Музыка:
-- MVP: пользователь добавляет ссылки/файлы/превью (см. 7.4).
-- Не обещать полный Spotify SDK в MVP без ключей — сделать абстракцию `MusicProvider`.
-
-### 4.3. Репозиторий и структура (создать при старте реализации)
+Корень соответствует проекту LovePDuo (`C:\prodject\LovePDio` у владельца):
 
 ```text
-/apps/mobile          # клиент
-/packages/ui          # дизайн-система
-/packages/game-core   # чистая логика миниигр
-/backend              # функции/сокеты (если нужны)
+/apps/mobile
+/packages/ui
+/packages/game-core
+/backend
 /assets
   /brand
   /illustrations
   /3d
-  /lottie-or-rive
+  /motion
   /audio
+  /content
 /docs
-  TZ_COUPLES_APP.md   # этот файл
+  TZ_COUPLES_APP.md
   DESIGN_SYSTEM.md
   GAMES_SPEC.md
+  PROGRESS.md
+README.md
 ```
 
 ---
@@ -169,30 +197,30 @@
 
 ### 5.1. Направление
 
-**Dark Romantic Noir Soft-Glow** — не фиолетовый AI-дефолт, не кремовый “terracotta serif”, не газетный layout.
+**Dark Romantic Innovation** — не “немного тёмная love-app”, а отдельная вселенная.
 
 Ключевые слова:
-- ночь, бархат, тёплый свет свечи, стекло, глубина;
-- романтика через свет и материал, а не через розовые сердечки everywhere;
-- премиально, современно, чуть cinematic.
+- ночь, бархат, янтарь, пыльная роза, стекло, глубина, cinematic light;
+- романтика через свет и материал, не через розовые сердечки everywhere;
+- инновационные переходы, кастомный chrome, ощущение “дорого и странно красиво”.
 
-### 5.2. Цветовая система (CSS/Theme tokens)
+### 5.2. Цветовая система
 
 ```text
---bg-0:        #07060A          // почти чёрный космос
---bg-1:        #121018          // основной фон
---bg-2:        #1B1524          // поверхности
---bg-elevated: #241C31          // карточки/листы (использовать редко)
+--bg-0:        #07060A
+--bg-1:        #121018
+--bg-2:        #1B1524
+--bg-elevated: #241C31
 --stroke:      rgba(255,214,186,0.12)
 
 --text-primary:   #F7EDE3
 --text-secondary: #C9B6A8
 --text-muted:     #8E7B72
 
---accent-rose:    #E39AA0       // пыльная роза (не неоновый pink)
---accent-amber:   #E2B07A       // тёплый янтарь света
---accent-wine:    #8E3B4A       // глубокое вино
---accent-mist:    #7A8CA3       // холодный mist для контраста
+--accent-rose:    #E39AA0   // пыльная роза
+--accent-amber:   #E2B07A   // янтарь
+--accent-wine:    #8E3B4A
+--accent-mist:    #7A8CA3
 
 --success: #6FAE8F
 --danger:  #C75B5B
@@ -200,105 +228,56 @@
 ```
 
 Правила:
-- Фон **не плоский**: радиальные градиенты, мягкий noise/grain, vignette.
-- Акценты ограничены: rose + amber. Не радуга.
-- Избегать дефолтного purple-indigo glow.
-- Карточки по умолчанию **не использовать**. Секции — через типографику, ритм, разделители света. Карточка только если это интерактивный контейнер (выбор игры, трек, приглашение).
+- Фон **не плоский**: радиальные градиенты, grain, vignette, живой свет.
+- Акценты: rose + amber. Не радуга. Не дефолтный purple-indigo AI look.
+- Карточки редко; home не dashboard.
+- Светлая тема в MVP **не делается**.
 
 ### 5.3. Типографика
 
 Не Inter/Roboto/Arial/system как display.
 
-Рекомендация:
-- Display / бренд: **Fraunces** или **Cormorant Garamond** (выразительный serif).
-- UI / body: **Sora** или **Manrope** (геометричный, современный).
-- Mono (коды пары): **IBM Plex Mono** / **JetBrains Mono**.
+- Display / бренд: Fraunces или Cormorant Garamond (или эквивалент equally expressive).
+- UI: Sora / Manrope.
+- Mono (коды пары / LPD): IBM Plex Mono / JetBrains Mono.
 
-Иерархия:
-- H1 бренд: очень крупно на hero.
-- H2 секции: одна мысль на секцию.
-- Body: коротко, воздушно.
+### 5.4. Motion (обязательно)
 
-### 5.4. Motion (обязательно 2–3+ осознанных движения)
+1. Breathing dark background на Home/Onboarding.
+2. Pair-link cinematic при связке пары.
+3. Veil-переходы экранов.
+4. Juice в играх (perfect/hit/miss, мягкий feedback).
+5. Post-match typography reveal для дразнилок/комплиментов.
 
-1. **Aurora breathing** — медленное дыхание градиентного фона на Home/Onboarding.
-2. **Pair link pulse** — при успешном соединении пары вспышка/сшивка двух светящихся точек.
-3. **Screen veil** — переходы экранов через полупрозрачную “вуаль”, не резкий material slide.
-4. Микро: press-scale кнопок 0.97, haptic где возможно.
-5. В играх: juice (hit feedback, soft camera shake умеренно).
+### 5.5. UX
 
-Не делать: бесконечный particle hell, неон-глитч ради глитча.
-
-### 5.5. UX-принципы
-
-- Один job на экран/секцию.
-- Первый экран home после связки пары: бренд + статус партнёра + 1 главный CTA (“Играть вместе”) + вторичный доступ к музыке/ритуалам.
-- Не превращать home в dashboard со статами и плитками.
-- Пустые состояния — красивые и полезные, не “No data”.
-- Ошибки сети — человеческие: «Связь моргнула. Попробуем ещё раз.»
-
-### 5.6. Адаптив
-
-- Телефоны от ~360×640.
-- Жесты удобны одной рукой где возможно.
-- Safe areas, жесты назад Android.
-- Тёмная тема единственная в MVP (light theme не делать).
+- Один job на секцию.
+- Home после связки: бренд + статус партнёра + главный CTA «Играть вдвоём» + доступ к музыке/ритуалам.
+- Пустые состояния красивые.
+- Ошибки человеческие.
 
 ---
 
 ## 6. Информационная архитектура и экраны
 
-### 6.1. Навигация
+### 6.1. Навигация (кастомный tab bar)
 
-Нижний кастомный tab bar (не стандартный Material):
+1. **Home** — комната пары  
+2. **Play** — миниигры  
+3. **Music** — общая музыка (остаётся в приложении)  
+4. **Together** — ритуалы/искры  
+5. **Profile** — пара, настройки  
 
-1. **Home** — комната пары
-2. **Play** — миниигры
-3. **Music** — общая музыка
-4. **Together** — ритуалы/вопросы/активности
-5. **Profile** — пара, настройки, эстетика
-
-Badge/presence партнёра — мягкая точка статуса (online/away/offline).
-
-### 6.2. Карта экранов (MVP+)
+### 6.2. Экраны MVP+
 
 **Auth / Onboarding**
-- Splash (бренд)
-- Welcome (hero)
-- Sign in / Sign up (email + guest optional)
+- Splash LPD
+- Welcome hero
+- Sign in / Sign up
 - Create pair / Join pair (код + QR)
 - Pair success cinematic
 
-**Home**
-- Pair room
-- Partner presence
-- Tonight suggestion
-- Quick play
-
-**Play**
-- Game catalog
-- Lobby (host/join room, ready states)
-- In-game
-- Round result / rematch
-- Soft quit confirm
-
-**Music**
-- Shared library
-- Now playing
-- Add track flow
-- Mood playlists (“Night drive”, “Slow morning”, “Our chaos”)
-
-**Together**
-- Daily spark (вопрос дня)
-- Mini rituals (таймер свечи, “отправить тепло”, совместный таймер)
-- Memories strip (короткие записи моментов) — без перегруза
-
-**Profile**
-- Avatars pair view
-- Pair nickname
-- Theme accents (ограниченные пресеты)
-- Notifications
-- Leave / unlink pair (dangerous, confirm)
+**Home / Play / Music / Together / Profile** — как в v1, с ребрендингом LovePDuo.
 
 ---
 
@@ -308,441 +287,426 @@ Badge/presence партнёра — мягкая точка статуса (onli
 
 **Must**
 - Регистрация/вход.
-- Создание пары → генерация 6-символьного кода.
+- Создание пары → код (6 символов).
 - Вступление по коду.
 - Одна активная пара на пользователя в MVP.
-- Статус online/offline/last seen (last seen можно скрыть настройкой).
+- Presence online/away/offline.
 
 **Should**
-- QR invite.
-- Deep link `aurorapair://join/CODE`.
-- Переименование пары (“мы — …”).
+- QR + deep link `lovepduo://join/CODE`.
+- Имя пары.
 
-**Could**
-- Смена партнёра с cooldown.
-- Пара-3 (нет в MVP, явно out of scope).
-
-### 7.2. Presence и “комната”
+### 7.2. Presence / комната
 
 - Realtime presence.
-- Индикатор “партнёр в приложении”.
-- Возможность отправить “pulse” (короткий тактильный/визуальный сигнал “я тут”).
-- Home как общая “комната” с фоном-настроением (ночь/дождь/тёплый свет) — смена пресетов.
+- Pulse “я тут”.
+- Mood-фон комнаты (ночь / тёплый свет / дождь) — пресеты.
 
-### 7.3. Миниигры на двоих (ядро продукта)
+### 7.3. Миниигры на двоих — ядро
 
-Общие требования ко всем играм:
-- Режим **синхронный на двоих** (оба онлайн).
-- Lobby: кто host, ready, start.
-- Реконнект мягкий (30–60 сек).
-- Чёстрый win/lose/draw + rematch.
-- Локализация строк из словаря.
-- Анти-чит базовый на серверной валидации где критично (счет, ходы).
-- Каждая игра имеет: icon, cover art, short description, estimated time, skill tags.
+#### Общие правила для ВСЕХ игр
 
-#### GAME-01 — Signal Draw (рисовалка по очереди / вместе)
-- Один холст на двоих.
-- Режимы: по очереди / одновременно.
-- Цвета из палитры бренда + eraser.
-- Сохранение рисунка в Memories.
-- Ассеты: brush cursor glow, paper grain overlay.
+- Игра с **двух телефонов** (два аккаунта одной пары), realtime.
+- Не “ватные заглушки”, а **проработанные** игрушки: понятные правила, juice, баланс, результат, rematch.
+- Lobby: host/ready/start/reconnect.
+- После матча — **живой post-match copy**: азарт + флирт, не сухой “Player1 win”.
+- В процессе доработки агент сам усиливает feel (тайминги, спавн, feedback, читаемость), пока Ideal Bar не закрыт.
+- MVP: сначала вылизать **3 игры**, потом расширять каталог.
 
-#### GAME-02 — Heartbeat Tap (ритм-игра)
-- На экране пульс/круг; оба тапают в ритм под бит.
-- Общий score за синхронность (насколько одновременно попали).
-- Короткий трек 30–45 сек (сгенерировать/взять свободный loop).
-- Juice: perfect/great/miss.
+#### Post-match messaging engine (важно владельцу)
 
-#### GAME-03 — Soft Duel (лёгкая дуэль реакций)
-- Появляются цели; кто быстрее нажал свою сторону.
-- Fair spawn с серверной сиды.
-- Best of 5.
-- Не агрессивный визуал — дуэль игривая.
+После сравнения результатов система пишет персонализированные фразы в духе:
 
-#### GAME-04 — Word Veil (слова/ассоциации)
-- Одному показывается слово-секрет; второй угадывает по подсказкам/эмодзи-запрещено/коротким хинтам.
-- Раунды 3–5.
-- Режим “только мы”: кастомные слова пары.
+- победителю: «Ты сейчас горячее. Не расслабляйся.»
+- проигравшему: «Она любит тебя сильнее по очкам. Уговори сыграть ещё раз и докажи обратное.»
+- ничья: «Синхрон опасный. Ещё раунд?»
 
-#### GAME-05 — Orbit Catch (кооператив)
-- Два игрока управляют половинами орбиты/щита, ловят падающий свет.
-- Co-op score.
-- Простая физика.
+Тон: дерзко-милый, без унижения. Пул фраз ≥ 30, с учётом пола/имени если известны, иначе нейтральные формы (“твой человек”, “партнёр”, имена профилей).
 
-#### GAME-06 — Truth Or Spark (не классическая бутылочка)
-- Карточки: вопрос / задание / “spark” (комплимент).
-- Фильтры: soft / spicy (без NSFW 18+ контента в Play-safe формулировках; spicy = флирт max).
-- Можно пропустить карточку (лимит).
+Хранить в `assets/content/post_match_ru.json`.
 
-**MVP игры (обязательно к первому публичному билду):** GAME-01, GAME-02, GAME-06.  
-**Сразу после MVP:** GAME-03, GAME-04, GAME-05.
+---
 
-### 7.4. Музыка
+#### GAME-01 — Sky Claim (бывш. идея “ловить хуйню с неба”)
 
-Цель: общая аудио-зона пары, не полноценный Spotify-клон.
+> Это та игра, которую владелец описал интуитивно: каждому своё поле, ловля объектов с неба, сравнение результатов, дразнилки.
 
-**MVP**
-- Добавить трек вручную: название, исполнитель, cover URL/upload, link (YouTube/Spotify/Apple) опционально.
-- Shared library пары.
-- Now playing status (“я слушаю …”) — статусный, даже если поток ограничен.
-- Реакции партнёра на трек (❤️ / 🔥 / 🌧).
-- Плейлисты-настроения (создать 3 дефолтных).
+**Суть**
+- 2 телефона, синхронный раунд ~45–60 сек.
+- С неба падают объекты (огни/сердца-стилизованные orbs/янтарные искры — в стиле бренда, не клипарт).
+- У каждого игрока **своя зона ловли** на своём экране (не один shared paddle).
+- Серверная/общая seed-спавна для честности таймингов старта.
+- Очки за ловлю; штрафы за промахи/падение мимо (настроить в балансе).
+- В конце: сравнение счёта + post-match фраза + rematch.
 
-**Ограничения честно прописать в UI**
-- Полный стриминг лицензированной музыки требует провайдера. В MVP:
-  - превью (если есть),
-  - или открытие внешней ссылки,
-  - или upload своих коротких audio clips (пользовательский контент, лимит размера).
+**Проработка**
+- Несколько типов объектов (обычный / ценный / “обманка”).
+- Комбо за серию.
+- Чёткий feel тапа/свайпа.
+- Читаемый HUD, не перегруженный.
+- Красивый fail/success feedback.
 
-**Should**
-- Простой in-app audio player для user-uploaded mp3/m4a (лимит 10–15 МБ, длительность warning).
-- Очередь совместного прослушивания (host controls).
+**Не делать:** убогий clone “падающих сердечек” без physics/juice.
 
-### 7.5. Together / развлечения
+---
 
-- **Daily Spark**: один вопрос дня для пары (общий, синхронизированный по UTC date).
-- **Send Warmth**: анимированный жест + push “тебе отправили тепло”.
-- **Candle Timer**: 5/10/15 мин “побыть вместе” с визуалом свечи (тухнет по таймеру).
-- **Tiny Notes**: короткие записки (лимит 280 символов), не полноценный мессенджер.
-- Memories: автосохранение рисунков/лучших раундов/заметок.
+#### GAME-02 — Heartbeat Tap (ритм на двоих)
+
+- Общий бит; оба тапают в ритм.
+- Считается личная точность + **sync bonus**, если попали почти одновременно.
+- Короткий трек 30–45 сек.
+- Perfect/Great/Miss + финальный dual score.
+- Post-match про “кто лучше чувствует ритм пары”.
+
+---
+
+#### GAME-03 — Truth Or Spark
+
+- Карточки: вопрос / задание / spark (комплимент/флирт).
+- Фильтры: soft / spicy (Play-safe, без explicit NSFW).
+- Можно skip с лимитом.
+- Не ватный контент: живые формулировки, без корпоративного бреда.
+- ≥ 60 карточек RU на старте.
+
+---
+
+#### GAME-04..06 (после вылиза MVP)
+
+- Signal Draw (общий холст) — отдельно от Sky Claim.
+- Soft Duel (реакции).
+- Word Veil (ассоциации).
+- Orbit Catch co-op — если нужен кооператив после конкурентного Sky Claim.
+
+**MVP обязательно:** GAME-01 Sky Claim, GAME-02 Heartbeat Tap, GAME-03 Truth Or Spark.  
+Главное качество: **с двух телефонов реально кайфово играть**, а не “технически работает”.
+
+### 7.4. Музыка — “подгрузили и осталось в приложении”
+
+Цель владельца: музыка **живёт внутри LovePDuo**, а не только открывает внешние ссылки и забывается.
+
+#### Must (MVP+)
+
+1. **Upload своих треков** (mp3/m4a и т.п.)
+   - файл сохраняется в storage пары;
+   - метаданные + cover;
+   - воспроизведение **внутри приложения**;
+   - после перезахода трек на месте.
+2. **Библиотека пары**
+   - общий список;
+   - кто добавил;
+   - реакции ❤️/🔥/🌧;
+   - плейлисты-настроения.
+3. **Now playing**
+   - статус “слушаю …”, видно партнёру.
+
+#### Should / Try hard (интеграции)
+
+Агент **обязан попытаться** сделать импорт, а не сразу сдаться на “только ссылки”:
+
+1. **Spotify**
+   - OAuth + Spotify App Remote / Web API насколько позволяют ключи и политики.
+   - Минимум: поиск/привязка трека + metadata + deep link playback.
+   - Если доступен remote control — управление Spotify playback из LPD UI.
+   - Метаданные и “наш трек” **сохраняются в библиотеке пары** даже если стрим идёт через Spotify.
+2. **VK Music** (если технически реально)
+   - исследовать VK API / доступные user-token сценарии;
+   - если получится: импорт трека/аудио в библиотеку пары;
+   - если официально нельзя полноценно тянуть аудио — честный fallback: сохранить metadata + link + предложить upload файла.
+3. **Ссылки**
+   - Spotify/YT/Apple/VK links как источник добавления metadata, если полный стрим недоступен.
+
+#### Принцип “осталось в приложении”
+
+- Любой успешно добавленный трек = запись в `Track` пары.
+- Upload-аудио = файл в нашем storage + in-app player.
+- Импорт из Spotify/VK = как минимум карточка трека навсегда в LPD; playback — лучший доступный provider layer.
+- Пользователь не должен чувствовать, что “мы просто открыли браузер и всё пропало”.
+
+Абстракция: `MusicProvider` + `PairMusicLibrary` (source of truth в нашем бэке).
+
+Честно отражать в UI ограничения провайдера (“Стрим через Spotify”, “Локальный файл LPD”, “Только ссылка”).
+
+### 7.5. Together
+
+- Daily Spark.
+- Send Warmth.
+- Candle Timer.
+- Tiny Notes.
+- Memories (лучшие раунды Sky Claim, реакции, заметки).
 
 ### 7.6. Уведомления
 
-- Партнёр онлайн (настройка, не спамить).
-- Приглашение в игру.
-- Pulse/Warmth.
-- Daily Spark reminder (опционально, тихо).
+- Инвайт в игру / rematch.
+- Warmth/Pulse.
+- Partner online (настраиваемо).
+- Daily Spark opt-in.
 
-### 7.7. Профиль и безопасность
+### 7.7. Безопасность
 
-- Аватары (upload + generative default mark).
-- Блок/разрыв пары.
-- Жалоба на контент (для UGC: рисунки, заметки, треки).
-- Политика: возраст 16+ / 18+ rating strategy для Play (ориентир PEGI-like 12/16, без explicit sexual content).
+- Аватары, unlink pair, report UGC.
+- 16+ orientation, без explicit NSFW.
+- Минимум PII, secrets в env.
 
 ---
 
 ## 8. Нефункциональные требования
 
-- Холодный старт до интерактивности: стремиться < 3–4 сек на среднем устройстве.
-- 60fps на основных переходах Home/Play; игры не проседать ниже 30–45 на mid-device.
-- Оффлайн: профиль/локальный кэш; игры требуют сеть.
-- Доступность: контраст текста достаточный; hit targets ≥ 44px.
-- Логирование крашей (Firebase Crashlytics / Sentry).
-- Аналитика событий: pair_created, game_started, game_finished, track_added, warmth_sent.
-- Приватность: контент пары виден только участникам пары.
+- Старт до интерактива: целевой ориентир < 3–4 сек.
+- UI transitions ~60fps; игры не ниже playable 30–45 на mid Android.
+- Игры требуют сеть; библиотека музыки частично доступна оффлайн для uploaded.
+- Crash-free высокий; аналитика key events.
+- Контент пары приватный.
 
 ---
 
-## 9. Дизайн-ассеты: что создать самому (Cursor / Blender / код)
+## 9. Дизайн-ассеты (агент делает сам)
 
-> Принцип: **агент сам производит ассеты**. Человек не обязан рисовать.
+### 9.1. 2D
 
-### 9.1. 2D / иллюстрации / UI graphics (обязательно нарисовать/сгенерировать)
+| ID | Ассет | Где |
+|----|-------|-----|
+| A01 | App icon LPD | store/device |
+| A02 | Wordmark LovePDuo / LPD | splash/home |
+| A03 | Welcome full-bleed hero | onboarding |
+| A04 | Pair-link cinematic stills/frames | after join |
+| A05 | Empty states | music/games/notes |
+| A06 | Custom tab icons | nav |
+| A07 | Game covers (Sky Claim, Heartbeat, Spark, …) | catalog |
+| A08 | Playlist covers | music |
+| A09 | Candle frames | ritual |
+| A10 | Grain overlays | global |
+| A11 | Catchable objects pack for Sky Claim | gameplay |
+| A12 | Post-match decorative typography marks | results |
 
-| ID | Ассет | Где | Как сделать |
-|----|-------|-----|-------------|
-| A01 | App icon | store + device | векторный mark: два орбитальных дуги + тёплая точка |
-| A02 | Wordmark AURORA | splash/home | SVG typography lockup |
-| A03 | Onboarding hero art | welcome | полноэкранный фон: ночное окно/город/aurora light (не inset card) |
-| A04 | Pair success illustration | after link | две светящиеся частицы, сливающиеся в одну орбиту |
-| A05 | Empty states set | library/games/notes | 4–6 мягких иллюстраций в едином стиле |
-| A06 | Tab icons | nav | custom line icons with subtle fill-on-active |
-| A07 | Game covers 01–06 | catalog | уникальные обложки, cinematic crop |
-| A08 | Playlist covers | music | 3 mood covers |
-| A09 | Candle sprite/frames | ritual | 2D animation frames или процедурная свеча |
-| A10 | Grain/noise overlays | global | transparent PNG/WebP |
-| A11 | Soft masks/glows | buttons, orbs | SVG/PNG |
-| A12 | Notification art | push (opt) | small bitmap |
+### 9.2. Blender / 3D
 
-Стиль арта: painterly soft lighting + clean modern shapes. Без детских клипартов и без стоковых “cute couple flat”.
+| ID | Ассет | Назначение |
+|----|-------|------------|
+| B01 | Lantern / orb room object | Home |
+| B02 | Dual orbit / LPD mark animation | pair cinematic |
+| B03 | Candle | ritual |
+| B04 | Sky Claim props | falling objects stylized |
+| B05 | Music totem / vinyl orb | Music screen |
 
-### 9.2. Blender / 3D (сделать агентом)
+Пайплайн: `blender -b` + Python scripts → glTF.  
+Если Blender недоступен — baked 2D/webp высокого качества, **не блокер**.
 
-| ID | Ассет | Назначение | Требования |
-|----|-------|------------|------------|
-| B01 | Room orb / lantern | Home decorative hero object | low-poly + emissive, export glTF |
-| B02 | Two rings / orbit pair mark | pair cinematic | simple animation 3–5s loop |
-| B03 | Candle model | Together ritual | stylized, warm emission, glTF |
-| B04 | Game props pack | Orbit Catch / Soft Duel | 5–8 props max, atlas textures |
-| B05 | Vinyl/orb music totem | Music screen visual anchor | optional but desired |
+### 9.3. Motion / Audio
 
-Пайплайн Blender:
-1. Создать сцены скриптом Python и/или вручную через CLI `blender -b`.
-2. Стилизованный look (не photoreal PBR ради PBR).
-3. Export `assets/3d/*.glb`.
-4. Встроить через scene viewer (Flutter `model_viewer` / RN equivalent) **только если perf ok**; иначе запечь turntable в видео/webp-анимацию.
-
-Если Blender в среде недоступен: fallback = высококачественные 2D-иллюстрации тех же объектов + процедурный glow. Не блокировать разработку.
-
-### 9.3. Motion design
-
-- Rive или Lottie: pair-link, warmth send, perfect-hit.
-- Если Rive сложно — Flutter custom painters / RN Reanimated + Skia.
-
-### 9.4. Звук
-
-- UI soft ticks / whooshes (короткие, тихие).
-- Heartbeat Tap chart loop.
-- Win/lose stingers.
-- Ambient room bed (очень тихо, toggle).
-
-Сгенерировать процедурно или из royalty-free; хранить источники в `assets/audio/SOURCES.md`.
+- Pair link, warmth, perfect-hit, post-match reveal.
+- UI ticks, Sky Claim catch SFX, Heartbeat loop, quiet ambient toggle.
+- Источники в `assets/audio/SOURCES.md`.
 
 ---
 
-## 10. Дизайн-система (компоненты)
+## 10. Дизайн-система
 
-Создать файл `docs/DESIGN_SYSTEM.md` при реализации. Минимум компонентов:
+При реализации создать `docs/DESIGN_SYSTEM.md`.
 
-- `AuroraBackground` (gradient + grain + breathing)
-- `BrandMark`
-- `PrimaryButton` / `GhostButton` / `DangerButton`
-- `PairAvatar`
-- `PresenceDot`
-- `SectionTitle`
-- `GameTile` (интерактивный; единственный “card-like” паттерн каталога)
-- `TrackRow`
-- `BottomNav`
-- `ModalSheet` (кастомная, не дефолтная серая)
-- `Toast`
-- `CodeInput` (6 символов)
-- `ReadyLobby`
+Компоненты минимум:
+`LpdBackground`, `BrandMark`, `PrimaryButton`, `GhostButton`, `DangerButton`, `PairAvatar`, `PresenceDot`, `GameTile`, `TrackRow`, `BottomNav`, `ModalSheet`, `Toast`, `CodeInput`, `ReadyLobby`, `PostMatchCard`.
 
-Правила spacing: 4/8/12/16/24/32/48.  
-Радиусы: 12–20 для интерактива, не stadium-pill everywhere.
+Spacing 4/8/12/16/24/32/48. Радиусы 12–20, не capsuel-pill everywhere.
 
 ---
 
-## 11. Данные и API (логическая модель)
+## 11. Данные и API
 
-### 11.1. Сущности
+- `User`, `Pair`, `Presence`
+- `GameSession` (+ per-game payload)
+- `Track` { sourceType: upload|spotify|vk|link, playbackMode, storageUrl?, providerId?, … }
+- `Playlist`, `Note`, `Memory`
+- `DailySpark`, `SparkAnswer`
+- `PostMatchLine` content packs
 
-- `User { id, displayName, avatarUrl, createdAt, settings }`
-- `Pair { id, code, title, memberIds[2], createdAt, moodPreset }`
-- `Presence { userId, state, updatedAt }`
-- `GameSession { id, pairId, gameType, hostId, state, seed, scores, startedAt, endedAt }`
-- `Track { id, pairId, title, artist, coverUrl, sourceType, sourceUrl, addedBy, createdAt }`
-- `Playlist { id, pairId, title, trackIds }`
-- `Note { id, pairId, text, authorId, createdAt }`
-- `Memory { id, pairId, type, payload, createdAt }`
-- `DailySpark { date, promptId }`
-- `SparkAnswer { pairId, date, userId, text }`
+Игровые состояния: `lobby → countdown → playing → round_end → finished`.
 
-### 11.2. Игровой протокол (общий)
-
-Состояния: `lobby → countdown → playing → round_end → finished`.  
-События: `ready`, `unready`, `start`, `input`, `state_sync`, `finish`, `rematch`, `leave`.
-
-Каждая игра описывает свой `input` schema в `docs/GAMES_SPEC.md`.
+Детали игр — `docs/GAMES_SPEC.md`.
 
 ---
 
-## 12. Безопасность, модерация, сторы
+## 12. Сторы и модерация
 
-- Google Play Data Safety заполнить честно.
-- UGC: жалобы, hide, retention policy.
-- Запрещён explicit NSFW, hate, illegal content.
-- Хранить минимум PII.
-- Секреты только в env, не в клиенте.
-- Rate limit на invite/join и presence pings.
+- Google Play Data Safety.
+- UGC report/hide.
+- Лицензии музыки: upload = ответственность пользователя; Spotify/VK — по их ToS/API.
+- Не обещать в сторе “весь каталог Spotify оффлайн”, если это невозможно легально.
 
 ---
 
-## 13. Фазы разработки (для автономного Cursor)
+## 13. Фазы
 
-### Phase 0 — Foundation (сначала)
-- Репо структура, lint, theme tokens, AuroraBackground, typography.
-- Splash + Welcome + пустая навигация.
-- README с запуском.
+### Phase 0 — Foundation
+- Структура LovePDuo, theme tokens, LpdBackground, typography, splash/welcome.
+- README + запуск.
 
 ### Phase 1 — Pair core
-- Auth (можно email magic/password).
-- Create/Join pair.
-- Home room + presence stub.
-- Push warmth MVP.
+- Auth, create/join, home, presence, warmth.
 
-### Phase 2 — Games MVP
+### Phase 2 — Games MVP (проработка)
 - Lobby framework.
-- GAME-01 Signal Draw.
-- GAME-02 Heartbeat Tap.
-- GAME-06 Truth Or Spark.
-- Results + rematch.
+- Sky Claim (вылизать).
+- Heartbeat Tap (вылизать).
+- Truth Or Spark (контент + UX).
+- Post-match phrases + rematch.
 
-### Phase 3 — Music MVP
-- Shared tracks CRUD.
-- Now playing status.
-- Player for uploads / external open.
+### Phase 3 — Music persists
+- Upload + in-app player + pair library.
+- Spotify integration attempt.
+- VK import attempt + honest fallbacks.
+- Now playing + reactions.
 
-### Phase 4 — Polish & Store prep
-- Ассеты A01–A12, B01–B03 минимум.
-- Empty/error/loading.
-- Аналитика/краши.
-- Скриншоты store, описание, privacy policy page.
-- Internal testing build.
+### Phase 4 — Polish & store
+- Ассеты, empty/error, analytics, screenshots, privacy, internal test.
 
-### Phase 5 — Expansion
-- GAME-03..05.
-- Joint listening queue.
-- Memories gallery.
-- Mood room presets + 3D lantern.
-- iOS.
+### Phase 5 — Expand
+- Доп. игры, joint queue, memories, iOS, 3D lantern если perf ок.
 
 ---
 
-## 14. Acceptance Criteria (когда можно сказать “уже круто”)
+## 14. Acceptance Criteria
 
-### 14.1. Must-have для “играбельного продукта”
+### 14.1. Must-have
 
-- [ ] Установка на Android, регистрация, связка двух аккаунтов кодом.
-- [ ] Home выглядит брендово в dark-romantic стиле (не шаблон).
-- [ ] Можно запустить минимум 3 миниигры на двоих end-to-end.
-- [ ] Есть музыкальная библиотека пары (добавление + список + статус).
-- [ ] Есть хотя бы 2 ритуала: Daily Spark и Warmth/Candle.
-- [ ] Нет критических крашей на основном флоу.
-- [ ] Анимации фона/pair-link/переходов присутствуют и не раздражают.
-- [ ] Кастомные иконки/обложки игр, не placeholder серые квадраты.
-- [ ] Код в git с историей осмысленных коммитов.
+- [ ] Android install, регистрация, связка двух аккаунтов.
+- [ ] Визуал dark romantic amber/dusty-rose, не светлый шаблон.
+- [ ] Бренд LovePDuo/LPD читается с первого экрана.
+- [ ] 3 MVP-игры реально играются с **2 телефонов**.
+- [ ] Sky Claim: раздельные результаты + дразнящий/живой post-match текст.
+- [ ] Музыка: upload сохраняется и играет внутри приложения после релога.
+- [ ] Попытка Spotify и исследование VK зафиксированы в PROGRESS (сделано или честный blocker).
+- [ ] Нет критических крашей на main flow.
+- [ ] Ассеты не серые placeholder.
+- [ ] Git history осмысленных коммитов + push.
 
-### 14.2. Ideal bar (к чему Cursor дотягивает сам)
+### 14.2. Ideal Bar
 
-- [ ] Визуально “это можно снимать в Reels”.
-- [ ] Соединение пары ощущается маленькой катсценной магией.
-- [ ] Игры понятны за 10 секунд без туториала-простыни.
-- [ ] Звуковой слой аккуратный.
-- [ ] Пустые состояния красивые.
-- [ ] Готовность к internal testing в Play Console.
-
----
-
-## 15. Метрики успеха (после релиза)
-
-- D1 retention > 35% (ориентир)
-- % пар, сыгравших ≥1 игру в первые 24 часа
-- Avg session length
-- Invites accepted / invites sent
-- Tracks added per pair / week
-- Crash-free sessions > 99%
+- [ ] Скрин хочется кинуть в сторис.
+- [ ] Pair-link ощущается маленькой катсценой.
+- [ ] Игры понятны за ~10 секунд и приятны по feel.
+- [ ] Post-match фразы вызывают улыбку/азарт, не стыд.
+- [ ] Музыкальная библиотека ощущается “нашей полкой”, а не списком ссылок.
+- [ ] Агент не оставляет очевидных UI/game feel косяков “на потом”.
 
 ---
 
-## 16. Backlog расширений (не забывать, но не мешать MVP)
+## 15. Метрики
 
-- Сезонные темы (зима/осень) без смены бренда.
-- Совместный фото-полярoid (осторожно с storage).
-- Версия “подарочный код” на праздники.
-- Private couple stickers.
-- Desktop/Steam short narrative companion later (отдельный продукт).
-- AI-генерация вопросов дня (с модерацией).
-- Wearable pulse sync — later fantasy.
+- D1 retention, % пар сыгравших игру за 24ч, session length, invite accept rate, tracks persisted / pair, crash-free.
 
 ---
 
-## 17. Out of Scope (явно нет в MVP)
+## 16. Backlog
+
+- Сезонные темы, sticker pack, gift codes, desktop companion later, AI sparks with moderation.
+
+---
+
+## 17. Out of Scope MVP
 
 - Полноценный мессенджер/звонки.
-- Dating для поиска пары.
-- Платежи/подписка (можно заложить архитектуру, не включать).
-- AR.
-- Многопользовательские комнаты >2.
-- Точный стриминг всего каталога Spotify без лицензий.
+- Dating matchmaking.
+- Подписка (только задел архитектуры).
+- Комнаты >2 игроков.
+- Обещание пиратского оффлайн-каталога Spotify/VK.
 
 ---
 
-## 18. Контент: стартовые промпты Daily Spark / Truth Or Spark
+## 18. Контент
 
-Создать `assets/content/sparks_ru.json` (≥ 60 вопросов), примеры категорий:
-- soft memories;
-- dreams;
-- flirt;
-- “выбери за нас”;
-- silly;
-- gratitude.
-
-Примеры:
-1. «Какой наш обычный момент ты бы сохранил в стеклянном шаре?»
-2. «Если бы у этого вечера был саундтрек, что бы играло первым?»
-3. «Назови черту во мне, которую ты заметил не сразу.»
+- `assets/content/sparks_ru.json` ≥ 60.
+- `assets/content/post_match_ru.json` ≥ 30.
+- Живой язык, без ваты.
 
 ---
 
-## 19. Store listing (заготовка)
+## 19. Store listing (черновик)
 
-**Название:** Aurora Pair: игры для двоих  
-**Short:** Тёмное романтичное пространство для пары — игры, музыка, ритуалы.  
-**Long:** (написать при Phase 4; тон поэтичный, без кликбейта)  
-**Keywords:** пара, игры для двоих, для влюблённых, couple game, long distance  
-
-Скриншоты обязательные:
-1. Home room
-2. Pair link cinematic
-3. Game catalog
-4. In-game (Heartbeat/Draw)
-5. Music
-6. Ritual candle
+- Название: **LovePDuo: игры для двоих**
+- Short: **LPD — Love Play Duo. Тёмные игры, музыка и ритуалы для пары.**
+- Скриншоты: Home, Pair link, Sky Claim, Heartbeat, Music library, Candle.
 
 ---
 
-## 20. План автономной работы агента (операционный)
+## 20. Операционный план агента
 
-1. Прочитать это ТЗ.
-2. Выбрать стек (Flutter предпочтительно) и зафиксировать в README.
-3. Phase 0 → commit/push.
-4. Phase 1 → самотест на 2 пользователях (2 эмулятора/профиля) → commit/push.
-5. Phase 2 по одной игре: реализация → тест вдвоём → polish juice → commit/push.
-6. Параллельно наращивать ассеты из секции 9.
-7. Перед остановкой сессии: всегда leave ветку в собираемом состоянии + краткий `PROGRESS.md`.
-8. Улучшать UI до соответствия секции 5, даже если фичи уже работают (“работает, но бледно” = не готово).
-
-### 20.1. Файл прогресса
-
-Вести `docs/PROGRESS.md`:
-- что сделано;
-- что дальше;
-- известные баги;
-- какие ассеты ещё missing.
+1. Прочитать ТЗ.
+2. Выбрать стек ради красоты+realtime, зафиксировать.
+3. Phase 0→1→2→3 с commit/push.
+4. Тестировать игры обязательно сценарием **2 клиента**.
+5. Любой “работает, но бледно/ватнó/криво” → дорабатывать сразу.
+6. Вести `docs/PROGRESS.md`.
+7. Останавливаться только по §0.2.
 
 ---
 
-## 21. Открытые решения (можно зафиксировать позже без блокировки)
+## 21. Открытые решения (дефолты)
 
-| Тема | Временное решение по умолчанию |
-|------|--------------------------------|
-| Финальный нейминг | AURORA PAIR |
-| Стек клиента | Flutter |
-| Backend | Firebase |
+| Тема | Дефолт |
+|------|--------|
+| Название | LovePDuo / LPD |
+| Путь владельца | `C:\prodject\LovePDio` |
+| Стек | Flutter (если не мешает Ideal Bar) |
+| Backend | Firebase/Supabase |
+| MVP игры | Sky Claim, Heartbeat Tap, Truth Or Spark |
+| Музыка | upload persist + Spotify try + VK try |
 | Подписка | нет в MVP |
-| Стриминг музыки | links + uploads |
-| 3D на Home | glTF если perf ок, иначе baked 2D |
-| Возрастной рейтинг | 16+ |
 
 ---
 
-## 22. Changelog документа
+## 22. Changelog
+
+### 1.1.0
+- Ребренд: **LovePDuo / LPD (Love Play Duo)**.
+- Путь проекта: `C:\prodject\LovePDio`.
+- Усилен dark romantic innovation brief (янтарь/пыльная роза как отличие от 100 love-apps).
+- Музыка: persist внутри приложения; upload must; Spotify/VK try-hard.
+- Игры: Sky Claim как проработанная dual-phone catch duel + post-match дразнилки; акцент на качество, не количество.
+- Добавлены §0.2 и §24: работа до Ideal Bar / до внешней остановки / до уверенности в максимуме.
 
 ### 1.0.0-draft
-- Первичное большое ТЗ: продукт, UX, игры, музыка, ассеты, фазы, acceptance, правила для Cursor Agent.
+- Первичное большое ТЗ (под временным именем Aurora Pair).
 
 ---
 
-## 23. Приложение A — Чеклист “это не дефолтная приложуха”
+## 23. Чеклист “это не дефолтная love-приложуха”
 
-Пройти глазами перед каждым крупным push:
+1. LovePDuo читается как бренд-герой?
+2. Фон с глубиной, не плоский серо-тёмный?
+3. Есть янтарь + пыльная роза, а не baby-pink / purple neon?
+4. Шрифты выразительные?
+5. Home не dashboard?
+6. Motion есть и к месту?
+7. Иконки/обложки кастомные?
+8. Игры не ватные, с двух телефонов кайфово?
+9. Музыка реально остаётся в приложении?
+10. Хочется снять Reels с UI?
 
-1. Есть ли бренд-герой, а не только текст в аппбаре?
-2. Фон имеет глубину (градиент/grain/свет), а не `#000` плоско?
-3. Шрифты выразительные, не системный стек?
-4. Нет розово-милых клипартов и нет purple neon AI look?
-5. Карточек не слишком много? Home не dashboard?
-6. Есть motion, который создаёт присутствие?
-7. Иконки кастомные?
-8. Пустые состояния не стыдные?
-9. Микрокопирайт звучит по-человечески?
-10. Хочется показать скрин друга́м?
-
-Если ≥2 ответа “нет” — дорабатывать визуал, не переходить к новым крупным фичам.
+Если ≥2 “нет” — сначала добить визуал/feel, не расползаться в новые фичи.
 
 ---
 
-**Конец ТЗ v1.0.0-draft.**  
-Дальше: человек уточняет/режет/добавляет → агент реализует по фазам до Ideal bar.
+## 24. Авто-доводка до Ideal Bar (обязательная секция)
+
+Если агент видит, что:
+- экран выглядит обычно;
+- анимация дешёвая;
+- игра technically ok, но feel слабый;
+- post-match текст пресный;
+- музыкальный UX “как список ссылок”;
+- есть баг, шероховатость, placeholder, плохой empty state;
+- можно сделать заметно круче без смены продукта;
+
+→ агент **сам улучшает это до Ideal Bar**.
+
+Не ждать отдельной команды “сделай красиво”.  
+Красиво и проработано — часть Definition of Done.
+
+Цикл доводки:
+1. Найти слабость относительно §5 / §14.2 / §23.
+2. Улучшить.
+3. Проверить на 1–2 клиентах.
+4. Commit/push.
+5. Повторять, пока не останется только остановка по §0.2.
+
+**Конец ТЗ v1.1.0 — LovePDuo (LPD).**
