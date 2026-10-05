@@ -8,3 +8,8 @@ client_requests.csv
 .idea/
 .vscode/
 *.iml
+
+# Nested LovePDuo working copy — product lives in its own repo
+LovePDuo/
+apps/
+backend/
