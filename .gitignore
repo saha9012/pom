@@ -1,8 +1,8 @@
 # Maven build files
 target/
 
-# SQLite database created while the application is running
-webstudio.db
+# Generated export
+client_requests.csv
 
 # IDE files
 .idea/

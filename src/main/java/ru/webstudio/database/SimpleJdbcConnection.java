@@ -10,7 +10,8 @@ import java.sql.SQLException;
  */
 public class SimpleJdbcConnection {
 
-    public static Connection connect(String url) throws SQLException {
-        return DriverManager.getConnection(url);
+    public static Connection connect(String url, String user, String password)
+            throws SQLException {
+        return DriverManager.getConnection(url, user, password);
     }
 }

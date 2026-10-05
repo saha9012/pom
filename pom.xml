@@ -16,18 +16,11 @@
     </properties>
 
     <dependencies>
-        <!-- JDBC-драйвер, который позволяет Java работать с файлом SQLite. -->
+        <!-- JDBC-драйвер для подключения Java к PostgreSQL. -->
         <dependency>
-            <groupId>org.xerial</groupId>
-            <artifactId>sqlite-jdbc</artifactId>
-            <version>3.46.1.0</version>
-        </dependency>
-
-        <!-- Убирает лишние служебные сообщения драйвера из консоли. -->
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-nop</artifactId>
-            <version>1.7.36</version>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <version>42.7.4</version>
         </dependency>
     </dependencies>
 
