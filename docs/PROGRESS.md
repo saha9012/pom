@@ -1,22 +1,17 @@
-# LovePDuo — статус
+# LovePDuo — статус (УСТАРЕВШАЯ КОПИЯ В `pom`)
 
-Документ ТЗ: [`TZ_COUPLES_APP.md`](./TZ_COUPLES_APP.md) (v1.1.0)
+> **СТОП:** этот репозиторий (`saha9012/pom`) **НЕ** является домом LovePDuo.
+>
+> Канонический репозиторий: **https://github.com/saha9012/LovePDuo.git**  
+> Owner local: `C:\prodject\LovePDio`  
+> Cloud working copy: `/workspace/LovePDuo`
+>
+> Вся дальнейшая реализация, commits, pushes и PRs — **только** в LovePDuo.
+> Актуальный ТЗ/прогресс: в репозитории LovePDuo (`docs/`).
 
-## Зафиксировано владельцем
-- Название: **LovePDuo** / **LPD** (Love Play Duo)
-- Путь: `C:\prodject\LovePDio`
-- Визуал: тёмный инновационный romantic (янтарь + пыльная роза), не ванильная love-app
-- Стек: не важен владельцу; важен вау-UI + игры с 2 телефонов
-- Музыка: должна **оставаться в приложении**; upload must; пробовать Spotify и VK
-- MVP игры: проработанные Sky Claim + Heartbeat Tap + Truth Or Spark
-- Агент работает до Ideal Bar / внешней остановки / уверенности в максимуме
+Документ ТЗ (зеркало): [`TZ_COUPLES_APP.md`](./TZ_COUPLES_APP.md) (v1.1.1) — см. §0.4.
 
 ## Сейчас
-- ТЗ обновлено под решения владельца.
-- Реализация клиента ещё не стартовала.
-
-## Дальше
-1. Phase 0 — foundation LovePDuo
-2. Phase 1 — pair core
-3. Phase 2 — games MVP (вылизать)
-4. Phase 3 — music persist + Spotify/VK attempts
+- ТЗ обновлено до v1.1.1 с каноническим remote LovePDuo.
+- Expo/backend scaffold перенесён в `/workspace/LovePDuo` (не оставлять продукт только в pom).
+- Push в LovePDuo блокируется, пока Cursor bot не получит write access к `saha9012/LovePDuo`.

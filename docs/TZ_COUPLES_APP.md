@@ -1,12 +1,12 @@
 # ТЗ: **LovePDuo** (LPD — Love Play Duo)
 
-> Версия документа: **1.1.0**  
+> Версия документа: **1.1.1**  
 > Статус: живой документ — можно дополнять секциями без ломки структуры  
 > Платформа: **Android (Google Play)** в первую очередь; iOS — фаза 2  
 > Исполнитель реализации: **Cursor Agent** (автономная разработка, самопроверка, git push)  
 > Язык продукта: RU (основной), EN (заготовка строк)  
 > Локальный путь проекта владельца: **`C:\prodject\LovePDio`**  
-> Репозиторий/рабочая копия агента: этот git-проект; зеркалировать структуру и смысл ТЗ под LovePDuo
+> **Канонический GitHub-репозиторий: [`https://github.com/saha9012/LovePDuo.git`](https://github.com/saha9012/LovePDuo.git)** — вся разработка только здесь (НЕ `saha9012/pom`)
 
 ---
 
@@ -45,11 +45,30 @@
 
 ### 0.3. Путь проекта
 
-- У владельца локально: **`C:\prodject\LovePDio`**
+- У владельца локально: **`C:\prodject\LovePDio`** (орфография папки — как указал владелец)
 - Имя продукта: **LovePDuo** (бренд)
 - Короткий бренд/аббревиатура: **LPD** = Love Play Duo
 - В коде/пакетах ориентиры: `lovepduo`, `love_p_duo`, applicationId вроде `app.lovepduo`
-- Документы ТЗ/прогресса: `docs/` внутри проекта
+- Документы ТЗ/прогресса: `docs/` внутри проекта LovePDuo
+
+### 0.4. Канонический репозиторий (критично)
+
+**Единственный правильный GitHub-репозиторий продукта LovePDuo:**
+
+| Что | Значение |
+| --- | --- |
+| Canonical remote | **`https://github.com/saha9012/LovePDuo.git`** |
+| Owner local path | **`C:\prodject\LovePDio`** |
+| Cloud/agent working copy | Должна трекать remote **LovePDuo** (не `pom`) |
+| Base branch | `main` |
+
+**Обязательные правила для агента и людей:**
+
+1. Вся реализация LovePDuo (код, ассеты, ТЗ, прогресс), **все commits, pushes и PRs** — **только** в `https://github.com/saha9012/LovePDuo.git`.
+2. Репозиторий **`saha9012/pom`** — учебный Java-проект. Он **НЕ** является домом LovePDuo. Не коммитить туда продукт, scaffold приложения, backend LovePDuo и не открывать PR «как будто это LovePDuo».
+3. Если агент оказался в рабочей копии `pom` — **остановить** LovePDuo-работу там, переключиться/клонировать LovePDuo и продолжать уже в нём.
+4. Feature-ветки для Cloud Agent: `cursor/<descriptive-name>-8960` (или суффикс текущего агента), PR в `main` репозитория LovePDuo.
+5. Локальный путь владельца (`C:\prodject\LovePDio`) и cloud-копия должны соответствовать одному и тому же смыслу репозитория LovePDuo.
 
 ---
 
@@ -656,6 +675,12 @@ Spacing 4/8/12/16/24/32/48. Радиусы 12–20, не capsuel-pill everywhere
 
 ## 22. Changelog
 
+### 1.1.1
+- Зафиксирован **канонический GitHub-репозиторий**: `https://github.com/saha9012/LovePDuo.git`.
+- Добавлена §0.4: вся реализация / commits / pushes / PRs LovePDuo — **только** в LovePDuo; **`saha9012/pom` запрещён** как дом продукта.
+- Уточнено: локальный путь владельца `C:\prodject\LovePDio`; cloud/agent working copy должна трекать LovePDuo remote.
+- Миграция ТЗ/прогресса и стартового Expo/backend scaffold в репозиторий LovePDuo.
+
 ### 1.1.0
 - Ребренд: **LovePDuo / LPD (Love Play Duo)**.
 - Путь проекта: `C:\prodject\LovePDio`.
@@ -709,4 +734,4 @@ Spacing 4/8/12/16/24/32/48. Радиусы 12–20, не capsuel-pill everywhere
 4. Commit/push.
 5. Повторять, пока не останется только остановка по §0.2.
 
-**Конец ТЗ v1.1.0 — LovePDuo (LPD).**
+**Конец ТЗ v1.1.1 — LovePDuo (LPD).**
