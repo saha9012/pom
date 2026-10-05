@@ -1,0 +1,10 @@
+# Maven build files
+target/
+
+# SQLite database created while the application is running
+webstudio.db
+
+# IDE files
+.idea/
+.vscode/
+*.iml
