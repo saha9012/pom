@@ -9,9 +9,10 @@
 > Вся дальнейшая реализация, commits, pushes и PRs — **только** в LovePDuo.
 > Актуальный ТЗ/прогресс: в репозитории LovePDuo (`docs/`).
 
-Документ ТЗ (зеркало): [`TZ_COUPLES_APP.md`](./TZ_COUPLES_APP.md) (v1.1.1) — см. §0.4.
+Документ ТЗ (зеркало): [`TZ_COUPLES_APP.md`](./TZ_COUPLES_APP.md) (v1.1.2) — см. §0.4.
 
 ## Сейчас
-- ТЗ обновлено до v1.1.1 с каноническим remote LovePDuo.
-- Expo/backend scaffold перенесён в `/workspace/LovePDuo` (не оставлять продукт только в pom).
-- Push в LovePDuo блокируется, пока Cursor bot не получит write access к `saha9012/LovePDuo`.
+- ТЗ **v1.1.2**: product-facing текст — только **LovePDuo / LPD**.
+- Имя Aurora Pair оставлено **только** в changelog v1.0.0-draft (историческая пометка о переименовании).
+- Expo/backend scaffold живёт в `/workspace/LovePDuo`.
+- Push в LovePDuo может быть заблокирован (403), пока Cursor bot не получит write access к `saha9012/LovePDuo`.
